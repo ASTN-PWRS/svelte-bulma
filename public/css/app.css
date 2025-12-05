@@ -1,0 +1,38 @@
+.message.is-fullwidth {
+  width: 100%;
+}
+
+.chat-bubble .message-body {
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  position: relative;
+}
+
+/* 左右の配置 */
+.chat-left {
+  margin-right: 4rem;
+}
+.chat-right {
+  margin-left: 4rem;
+}
+
+/* 吹き出しのしっぽ */
+.chat-left .message-body::after,
+.chat-right .message-body::after {
+  content: "";
+  position: absolute;
+  bottom: 0.5rem;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+}
+
+.chat-left .message-body::after {
+  left: -6px;
+  border-right-color: var(--bulma-scheme-main);
+}
+
+.chat-right .message-body::after {
+  right: -6px;
+  border-left-color: var(--bulma-primary);
+}

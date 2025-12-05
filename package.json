@@ -1,0 +1,28 @@
+{
+  "name": "svelte-bulma",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "build": "sass --load-path=./node_modules ./scss/custom-bulma.scss ./public/css/output-bulma.css && vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@iconify-json/tabler": "^1.2.23",
+    "@iconify/svelte": "^5.1.0",
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
+    "bulma": "^1.0.4",
+    "iconify-icon": "^3.0.2"
+  },
+  "devDependencies": {
+    "bulma-darkify": "^1.0.2",
+    "sass": "^1.94.2",
+    "svelte": "^5.45.5",
+    "vite": "^7.2.6"
+  }
+}

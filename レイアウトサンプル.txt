@@ -1,0 +1,94 @@
+
+  <svelte:options customElement="s-test2" />
+<!-- svelte-ignore css_unused_selector -->
+<style global>
+    @import "../../public/css/output-bulma.css";
+    .layout {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .main {
+      display: flex;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #f0f0f0;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .content-area {
+      flex-grow: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      background-color: #fff;
+    }
+
+    .footer {
+      background-color: #eee;
+      padding: 1rem;
+    }
+    
+
+  </style>
+  <div class="layout">
+    <!-- ヘッダー -->
+<nav class="navbar">
+       <div class="navbar-brand">
+        <a class="navbar-item" href="/">ヘッダー</a>
+      </div>
+  <div class="container is-primary">
+    <div id="navMenu" class="navbar-menu" style="border:1px solid red">
+      <div class="navbar-start">
+        <a href="/" class="navbar-item">Home</a>
+        <a href="/" class="navbar-item">Link</a>
+        <a href="/" class="navbar-item">Link</a>
+      </div>
+      <div class="navbar-center">
+        <div class="navbar-item has-text-weight-bold">中央タイトル</div>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a href='/' class="button is-dark">Documentation</a>
+            <a href='/' class="button is-link">Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+    <!-- メイン領域（サイドバー + コンテンツ） -->
+    <div class="main">
+      <!-- サイドバー -->
+      <aside class="sidebar" style="display:none">
+        <p class="menu-label">メニュー</p>
+        <ul class="menu-list">
+          <!-- svelte-ignore a11y_missing_attribute -->
+          <li><a>ダッシュボード</a></li>
+          <!-- svelte-ignore a11y_missing_attribute -->
+          <li><a>設定</a></li>
+          <!-- svelte-ignore a11y_missing_attribute -->
+          <li><a>ログアウト</a></li>
+        </ul>
+      </aside>
+
+      <!-- コンテンツ -->
+      <section class="content-area">
+        <h1 class="title">メインコンテンツ</h1>
+        <p>ここにページの主な内容が表示されます。</p>
+      </section>
+    </div>
+
+    <!-- フッター -->
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>フッター</p>
+      </div>
+    </footer>
+  </div>
