@@ -5,7 +5,7 @@
 </style>
 <script>
 
-  let { model } = $props();
+  let { model,class: klass, type, placeholder } = $props();
 
   function handleChange() {
     $host().dispatchEvent(new CustomEvent("modelChange", {
@@ -22,8 +22,8 @@
   </script>
 
 <div>
-  <p>{model.title}</p>
-  <input  class="input is-small"
-          type="search"
-          placeholder="Search..." bind:value={model.value} oninput={handleChange}/>
+  <input bind:value={model.value} oninput={handleChange} 
+    class={klass}
+    type={type}
+    placeholder={placeholder}/>
 </div>

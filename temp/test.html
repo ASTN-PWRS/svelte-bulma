@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script type="module">
+    import { MyElementWrapper } from "./js/wrapper.js";
+    import "./js/sveltelibs.es.js"; // Svelte 5 でビルド済み Web Component
+
+    const comp = document.getElementById("comp");
+    const wrapper = new MyElementWrapper(comp);
+
+    // 親 → 子
+    wrapper.setModel({ title: "親から子へ更新", value: 42 });
+
+    // 子 → 親
+    wrapper.onModelChange((model) => {
+      console.log("Updated model:", model);
+    });
+
+    // 親から更新
+    setTimeout(() => {
+      wrapper.setModel({ title: "Updated", value: 100 });
+    }, 2000);
+  </script>
+
+  <body>
+    <s-tassmessage id="comp"></s-tassmessage>
+  </body>
+</html>
