@@ -7,6 +7,7 @@ export * from "./layouts/Container.svelte";
 export * from "./components/Nav.svelte";
 export * from "./components/Footer.svelte";
 export * from "./components/DrawerIcon.svelte";
+export * from "./components/TabsMessage.svelte";
 
 // export * from "./components/AppFooter.svelte";
 // export * from "./components/DarkBtn.svelte";
