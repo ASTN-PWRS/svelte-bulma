@@ -21,9 +21,9 @@
 
   </script>
 
-<div>
+
   <input bind:value={model.value} oninput={handleChange} 
     class={klass}
     type={type}
     placeholder={placeholder}/>
-</div>
+

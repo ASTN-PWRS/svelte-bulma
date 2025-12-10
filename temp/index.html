@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bulma/bulma.min.css" />
+    <link rel="stylesheet" href="./css/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="./css/app.css" />
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="message is-info">
+          <div class="message-header">
+            <div class="level is-mobile" style="width: 100%">
+              <!-- 左側: ヘッダタイトル -->
+              <div class="level-left">
+                <p>AIの回答</p>
+              </div>
+              <div class="level is-mobile" style="width: 100%">
+                <!-- タブ -->
+                <div class="level-left">
+                  <div class="tabs is-small is-toggle">
+                    <ul id="answer-tabs"></ul>
+                  </div>
+                </div>
+
+                <!-- 開閉ボタン -->
+                <div class="level-right">
+                  <p class="control has-icons-left">
+                    <s-tassmessage
+                      id="comp"
+                      class="input is-small"
+                      type="search"
+                      placeholder="検索..."
+                    ></s-tassmessage>
+                    <span class="icon is-left">
+                      <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                  </p>
+                  <div class="control has-icons-left">
+                    <input
+                      class="input is-small"
+                      type="search"
+                      placeholder="検索"
+                    />
+                    <span class="icon is-left">
+                      <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <button id="toggle-btn" class="button is-small is-light">
+                    <span class="icon">
+                      <i class="fas fa-chevron-down"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="message-body">
+            <div id="answer-contents"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script type="module">
+      //
+      import { MyElementWrapper } from "./js/wrapper.js";
+      import "./js/sveltelibs.es.js"; // Svelte 5 でビルド済み Web Component
+
+      const comp = document.getElementById("comp");
+      const wrapper = new MyElementWrapper(comp);
+
+      // 親 → 子
+      wrapper.setModel({ title: "親から子へ更新", value: 42 });
+
+      // 子 → 親
+      wrapper.onModelChange((model) => {
+        console.log("Updated model:", model);
+      });
+
+      // 親から更新
+      setTimeout(() => {
+        wrapper.setModel({ title: "Updated", value: 100 });
+      }, 2000);
+    </script>
+    <script>
+      // 例: AIから受け取ったJSON
+      const answers = [
+        { id: 1, question: "質問A", answer: "回答A" },
+        { id: 2, question: "質問B", answer: "回答B" },
+        { id: 3, question: "質問C", answer: "回答C" },
+        { id: 4, question: "質問D", answer: "回答D" },
+        { id: 5, question: "質問E", answer: "回答E" },
+      ];
+      const tabsContainer = document.getElementById("answer-tabs");
+      const contentsContainer = document.getElementById("answer-contents");
+
+      // タブとコンテンツを生成
+      answers.forEach((item, index) => {
+        // タブ生成（idを利用）
+        const li = document.createElement("li");
+        if (index === 0) li.classList.add("is-active");
+        li.setAttribute("data-tab", `tab-${item.id}`);
+        li.innerHTML = `<a>ID${item.id}</a>`; // タブにはIDを表示
+        tabsContainer.appendChild(li);
+
+        // コンテンツ生成（質問＋回答）
+        const div = document.createElement("div");
+        div.id = `tab-${item.id}`;
+        div.classList.add("tab-content");
+        if (index === 0) div.classList.add("is-active");
+        div.innerHTML = `
+          <p><strong>質問:</strong> ${item.question}</p>
+          <p><strong>回答:</strong> ${item.answer}</p>
+        `;
+        contentsContainer.appendChild(div);
+      });
+
+      // タブ切り替え処理
+      tabsContainer.querySelectorAll("li").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          // タブの切り替え
+          tabsContainer
+            .querySelectorAll("li")
+            .forEach((t) => t.classList.remove("is-active"));
+          tab.classList.add("is-active");
+
+          // コンテンツの切り替え
+          const target = tab.getAttribute("data-tab");
+          contentsContainer
+            .querySelectorAll(".tab-content")
+            .forEach((content) => {
+              content.classList.remove("is-active");
+              if (content.id === target) {
+                content.classList.add("is-active");
+              }
+            });
+        });
+      });
+      const toggleBtn = document.getElementById("toggle-btn");
+      const answerContents = document.getElementById("answer-contents");
+      const icon = toggleBtn.querySelector("i");
+
+      toggleBtn.addEventListener("click", () => {
+        answerContents.classList.toggle("is-hidden");
+
+        // アイコン切り替え
+        if (answerContents.classList.contains("is-hidden")) {
+          icon.classList.remove("fa-chevron-up");
+          icon.classList.add("fa-chevron-down");
+        } else {
+          icon.classList.remove("fa-chevron-down");
+          icon.classList.add("fa-chevron-up");
+        }
+      });
+    </script>
+  </body>
+</html>
